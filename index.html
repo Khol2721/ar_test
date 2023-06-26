@@ -37,7 +37,7 @@
             <a-assets>
                 <video
                     id="vid"
-                    src="assets/asset.mp4"
+                    src="assets/ar16.webm"
                     preload="auto"
                     response-type="arraybuffer"
                     loop
@@ -55,7 +55,7 @@
                 url="assets/marker.patt"
                 videohandler
                 smooth="true"
-                smoothCount="10"
+                smoothCount="20"
                 smoothTolerance="0.01"
                 smoothThreshold="5"
                 raycaster="objects: .clickable"
@@ -65,7 +65,9 @@
             >
                 <a-video
                     src="#vid"
-                    scale="1 1 1"
+                    scale="0.1 0.1 0.1"
+                    width="9"
+                    height="16" 
                     position="0 0.1 0"
                     rotation="-90 0 0"
                     class="clickable"
