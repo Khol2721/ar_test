@@ -38,7 +38,7 @@
             <a-assets>
                 <video
                     id="vid"
-                    src="assets/ar16.hevc.mp4"
+                    src="assets/ar16.webm"
                     type='video/mp4; codecs="hvc1"'
                     preload="auto"
                     response-type="arraybuffer"
@@ -73,12 +73,12 @@
                     position="0 0.1 0"
                     rotation="-90 0 0"
                     class="clickable"
-                    material="shader: transparent-video;"
+                    material="shader: transparent-video; src: #vid; transparent: true"
                 ></a-video>
             </a-marker>
 
             <a-entity 
-                material="shader: transparent-video; src: #vid"
+                material="shader: transparent-video; src: #vid; transparent: true"
                 camera
             ></a-entity>
         </a-scene>
