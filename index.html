@@ -101,22 +101,81 @@
         
         </style>
         <script>
-            AFRAME.registerComponent('videohandler', {
-                init: function () {
-                    var marker = this.el;
-                    this.vid = document.querySelector("#vid");
+            var markerFound = 0;
+            let n;
+            AFRAME.registerComponent('button', {
+            init: function () {
 
-                    marker.addEventListener('markerFound', function () {
-                        this.toggle = true;
-                        this.vid.play();
-                    }.bind(this));
 
-                    marker.addEventListener('markerLost', function () {
-                        this.toggle = false;
-                        this.vid.pause();
-                    }.bind(this));
-                },
-            });
+                let i = setInterval(function() {
+                    if (document.querySelector("#arjs-video")){
+                        clearInterval(i);
+                        document.getElementById('playButtonDIV').style.display = 'flex';
+
+                        document.getElementById('FullScreenButtonDIV').style.display = 'flex';
+                    }
+                }, 1500);
+
+
+
+                function reset(){
+                    for(let i = 0; i < n; i++){
+                        Video[i].pause();
+                        Video[i].muted = true;
+                        Video[i].currentTime = 0;
+                    }
+                }
+                function play() {
+                    for (let i = 0; i < n; i++) {
+                        Video[i].muted = false;
+                        Video[i].play();
+                    }
+                }
+
+
+                var elem = document.documentElement;
+                var marker = document.querySelector("#marker");
+                var Video = document.getElementsByClassName("video_asset");
+                var videoButton = document.getElementsByClassName("video_button");
+
+                n = Video.length;
+                let curVideo = 0;
+
+                firstEnter = true;
+
+                videoButton[0].addEventListener('click', function(evt){
+                        let music = document.getElementById('music')
+                        music.volume = 0.3;
+                        music.play()
+                        document.getElementById('playButtonDIV').style.display = 'none';
+                        Video[curVideo].muted = false;
+                        firstEnter = false;
+                        Video[curVideo].play();
+                })
+
+
+
+                marker.addEventListener("markerFound", function (evt) {
+                    markerFound = 1;
+
+                    if(firstEnter){
+                        document.getElementById('playButtonDIV').style.display = 'flex';
+                    }
+
+                    else if(document.getElementById('playButtonDIV').style.display == 'none'){
+                        Video[curVideo].play();
+                    }
+
+                });
+
+                marker.addEventListener("markerLost", function (evt) {
+                    markerFound = 0;
+                    document.getElementById('playButtonDIV').style.display = 'none';
+                    Video[curVideo].pause();
+                });
+
+            }
+        });
         </script>
         <script>
 
